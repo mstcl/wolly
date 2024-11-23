@@ -1,0 +1,220 @@
+{{define "index"}}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+    <title>wolly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <style>
+:root {
+  --background: #fefefe;
+  --background-2: #fafafa;
+  --foreground: #222;
+  --secondary: #f0f0f0;
+  --tertiary: #e0e0e0;
+  --quaternary: #666;
+  --danger: firebrick;
+  --a: darkred;
+  --b: darkgoldenrod;
+  --c: darkmagenta;
+  --d: darkblue;
+  --e: darkgray;
+}
+html {background:var(--background);color:var(--foreground)}
+body {margin:auto;max-width:700px;font-family:"Inter",sans-serif}
+main {margin-top:9rem;}
+a {text-decoration-style: dotted}
+footer {color:var(--quaternary);margin-inline:auto;margin-top:1.5rem;bottom:0;left:0;right:0;width:fit-content;text-align:center;}
+footer a, footer a:visited {color:var(--quaternary)}
+.form-group {display:inline;}
+form {margin:0 auto;text-align:center;}
+#wolly form {font-family:"JetBrains Mono",monospace;}
+#wolly, #wolly input {line-height: 3rem; font-size:2.5rem;font-weight:600;font-family:"JetBrains Mono",monospace;}
+#wolly input {width:5rem;text-align:center;height:3.5rem;vertical-align:middle;border:2px solid var(--secondary);border-radius:.5rem;background:var(--secondary);color: var(--foreground)}
+#wolly input[aria-invalid="true"] {border: 2px solid var(--danger);}
+.spacer {padding: 4rem;}
+.button {padding: .5rem;border-radius:.5rem;border: none;background:var(--d);color:var(--secondary);font-size:1.3rem;font-weight:600;cursor:pointer;font-family:"JetBrains Mono",monospace;}
+#wolly span:last-child {display:none}
+@media only screen and (max-width: 600px) {
+  #wolly {font-size:2rem}
+  #wolly input {width:4rem;font-size:2rem;height:2.5rem}
+  body {max-width: 100%}
+  main {margin-top: 4.5rem}
+  .spacer {padding:2rem;}
+  #wolly span:last-child {display:inherit;opacity:0}
+}
+@media only screen and (max-width: 300px) {}
+@media (prefers-color-scheme: dark) {
+    :root {
+    --background: #202020;
+    --background-2: #282828;
+    --foreground: #fefefe;
+    --secondary: #2e2e2e;
+    --tertiary: #3e3e3e;
+    --quaternary: #888;
+    --a: tomato;
+    --b: goldenrod;
+    --c: mediumorchid;
+    --d: skyblue;
+    --e: gray;
+    --danger: crimson;
+  }
+}
+  </style>
+</head>
+<body>
+  <footer>
+    <small><strong>wolly</strong> ⋅ tiny wake-on-lan relay ⋅ <a href="https://github.com/mstcl/wolly">src</a></small>
+  </footer>
+  <div class="spacer"></div>
+  <main>
+    <section>
+      <form id="wolly"
+        hx-post="/api/wake"
+        hx-swap="none"
+        hx-vals='{"ui": true}'
+        hx-replace-url="false"
+        hx-trigger="click[event.target.matches('button')] from:body"
+      ><div class="form-group"><input
+            name="a"
+            class="input"
+            placeholder="61"
+            required
+            hx-validate="true"
+            oninput='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:validate='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:failed='this.setAttribute("aria-invalid", "true");'
+            hx-on:htmx:validation:halted='this.setAttribute("aria-invalid", "true");'
+            type="text"
+            pattern="^([0-9a-fA-F]){2}$"
+            maxlength="2"
+          /></div><span>:</span><div class="form-group"><input
+            name="b"
+            class="input"
+            placeholder="1f"
+            required
+            hx-validate="true"
+            oninput='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:validate='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:failed='this.setAttribute("aria-invalid", "true");'
+            hx-on:htmx:validation:halted='this.setAttribute("aria-invalid", "true");'
+            type="text"
+            pattern="^([0-9a-fA-F]){2}$"
+            maxlength="2"
+          /></div><span>:</span><div class="form-group"><input
+            name="c"
+            class="input"
+            placeholder="9c"
+            required
+            hx-validate="true"
+            oninput='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:validate='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:failed='this.setAttribute("aria-invalid", "true");'
+            hx-on:htmx:validation:halted='this.setAttribute("aria-invalid", "true");'
+            type="text"
+            pattern="^([0-9a-fA-F]){2}$"
+            maxlength="2"
+          /></div><span>:</span><div class="form-group"><input
+            name="d"
+            class="input"
+            placeholder="d8"
+            required
+            hx-validate="true"
+            oninput='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:validate='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:failed='this.setAttribute("aria-invalid", "true");'
+            hx-on:htmx:validation:halted='this.setAttribute("aria-invalid", "true");'
+            type="text"
+            pattern="^([0-9a-fA-F]){2}$"
+            maxlength="2"
+          /></div><span>:</span><div class="form-group"><input
+            name="e"
+            class="input"
+            placeholder="55"
+            required
+            hx-validate="true"
+            oninput='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:validate='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:failed='this.setAttribute("aria-invalid", "true");'
+            hx-on:htmx:validation:halted='this.setAttribute("aria-invalid", "true");'
+            type="text"
+            pattern="^([0-9a-fA-F]){2}$"
+            maxlength="2"
+          /></div><span>:</span><div class="form-group"><input
+            name="f"
+            class="input"
+            placeholder="32"
+            required
+            hx-validate="true"
+            oninput='this.setAttribute("aria-invalid", "false");'
+            onsubmit='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:validate='this.setAttribute("aria-invalid", "false");'
+            hx-on:htmx:validation:failed='this.setAttribute("aria-invalid", "true");'
+            hx-on:htmx:validation:halted='this.setAttribute("aria-invalid", "true");'
+            type="text"
+            pattern="^([0-9a-fA-F]){2}$"
+            maxlength="2"
+          /><span style="opacity:0;">:</span></div>
+        <br>
+        <br>
+        <button class="button">
+          Send it
+        </button>
+      </form>
+    </section>
+  </main>
+  <script>
+    const form = document.querySelector('#wolly')
+
+    const handleInput = ({target: input}) => {
+      if (input.parentNode.nextElementSibling) {
+        if (input.parentNode.nextElementSibling.nextElementSibling) {
+          if (input.parentNode.nextElementSibling.nextElementSibling.firstElementChild) {
+            if (input.value.length == input.maxLength) {
+              input.parentNode.nextElementSibling.nextElementSibling.firstElementChild.focus()
+            }
+          }
+        }
+      }
+    }
+
+    form.addEventListener('input', handleInput);
+
+    const handleDelete = ({target: input, key}) => {
+      if (input.parentNode.previousElementSibling) {
+        if (key === "Backspace" && input.value.length == 0) {
+            const prev = input.parentNode.previousElementSibling.previousElementSibling.firstElementChild
+            prev.focus()
+            prev.setSelectionRange(2, 2)
+        }
+      }
+    }
+
+    form.addEventListener('keydown', handleDelete);
+
+    const inputs = form.querySelectorAll('.form-group input')
+
+    const handlePaste = (e) => {
+      const paste = e.clipboardData.getData('text')
+      if (!/^([0-9a-fA-F]{2}[:]){5}([0-9a-fA-F]{2})$/.test(paste)) return event.preventDefault();
+
+      const values = paste.split(":")
+
+      inputs.forEach(
+        (input, i) => input.value = values[i] || ''
+      )
+      inputs[inputs.length-1].focus()
+    }
+
+    inputs[0].addEventListener('paste', handlePaste);
+  </script>
+</body>
+</html>
+{{end}}
