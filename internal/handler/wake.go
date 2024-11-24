@@ -47,6 +47,11 @@ func Wake(e echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, err)
 	}
 
+	hx := e.Request().Header.Get("HX-Request")
+	if isUi && len(hx) == 0 {
+		e.Redirect(http.StatusSeeOther, "/")
+	}
+
 	return nil
 }
 

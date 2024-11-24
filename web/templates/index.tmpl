@@ -77,11 +77,13 @@ form {margin:0 auto;text-align:center;}
   <main>
     <section>
       <form id="wolly"
+        method="post"
+        action="/api/wake"
         hx-post="/api/wake"
         hx-swap="none"
-        hx-vals='{"ui": true}'
         hx-replace-url="false"
         hx-trigger="click[event.target.matches('button')] from:body"
+        onsubmit="return false"
       ><div class="form-group"><input
             name="a"
             class="input"
@@ -162,6 +164,7 @@ form {margin:0 auto;text-align:center;}
             pattern="^([0-9a-fA-F]){2}$"
             maxlength="2"
           /><span style="opacity:0;">:</span></div>
+          <input type="hidden" name="ui" value="true" />
         <br>
         <br>
         <button class="button">
